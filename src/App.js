@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import api from './api/axiosConfig';
 import './App.css';
+import { useState, useEffect } from 'react';
 
 function App() {
+
+  const [movies, setMovies] = useState(); // here we return a destructured array from the hook
+  // first item in the destructured array is named movies and will store and array of movie data returned from a call to the relevant api endpoint
+  // The second item in the array is a function that can be used to change/update the state of the movies variable
+  // When the state of the variable tracked by react through the useState hook is changed, the component is rerendered by react
+      // so in this case the app componet will be rerendered when the state of the movies variable changes.
+
+  const getMovies = async () => {                    // here we have a function that handles HTTP requests to an enpoint that retien and array of movie data
+                                                     // once the movie data is successfully returned, this code that changes the state of the movies array is executed.
+    try {
+      
+      const response = await api.get("/api/v1/movies");   
+      
+      console.log(response.data);
+
+      setMovies(response.data);
+
+
+    } catch (error) {
+
+      console.log(error);
+      
+    }
+
+  }
+
+  useEffect(() => {
+    getMovies();
+  }, [])
+
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
     </div>
   );
 }
