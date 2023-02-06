@@ -14,7 +14,7 @@ function App() {
   // When the state of the variable tracked by react through the useState hook is changed, the component is rerendered by react
       // so in this case the app componet will be rerendered when the state of the movies variable changes.
 
-  const getMovies = async () => {                    // here we have a function that handles HTTP requests to an enpoint that retien and array of movie data
+  const getMovies = async () => {                    // here we have a function that handles HTTP requests to an endpoint that retien and array of movie data
                                                      // once the movie data is successfully returned, this code that changes the state of the movies array is executed.
     try {
       
