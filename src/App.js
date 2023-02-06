@@ -1,6 +1,10 @@
 import api from './api/axiosConfig';
 import './App.css';
 import { useState, useEffect } from 'react';
+import Layout from './components/Layout';
+import { Routes, Route } from 'react-router-dom';
+import Home from './components/home/Home';
+import Header from './components/header/Header';
 
 function App() {
 
@@ -14,9 +18,9 @@ function App() {
                                                      // once the movie data is successfully returned, this code that changes the state of the movies array is executed.
     try {
       
-      const response = await api.get("/api/v1/movies");   
-      
-      console.log(response.data);
+      const response = await api.get("/api/v1/movies");
+
+      console.log(response.data, 777);
 
       setMovies(response.data);
 
@@ -37,6 +41,17 @@ function App() {
 
   return (
     <div className="App">
+
+
+      <Header />
+
+      {/* establishing route mappings */}
+      <Routes>
+        <Route path='/' element={<Layout />} >
+          <Route path='/' element={<Home movies={movies} />} ></Route>
+
+        </Route>
+      </Routes>
       
     </div>
   );
